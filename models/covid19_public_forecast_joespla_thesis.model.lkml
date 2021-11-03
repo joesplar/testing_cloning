@@ -15,7 +15,7 @@ persist_with: covid19_public_forecast_joespla_thesis_default_datagroup
 explore: county_28d_historical_ {
   join: japan_prefecture_28d_historical_ {
     type: left_outer
-    relationship: one_to_one
+    relationship: many_to_many
     sql_on:  ${county_28d_historical_.forecast_date} =  ${japan_prefecture_28d_historical_.forecast_date};;
   }
 }
@@ -23,7 +23,7 @@ explore: county_28d_historical_ {
 explore: county_28d {
   join: japan_prefecture_28d {
     type: left_outer
-    relationship: one_to_one
+    relationship: many_to_many
     sql_on: ${county_28d.forecast_date} = ${japan_prefecture_28d.forecast_date} ;;
   }
 }
