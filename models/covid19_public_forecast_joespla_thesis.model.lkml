@@ -14,7 +14,13 @@ explore: county_14d {}
 
 explore: county_28d_historical_ {}
 
-explore: county_28d {}
+explore: county_28d {
+  join: japan_prefecture_28d {
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${county_28d.forecast_date} = ${japan_prefecture_28d.forecast_date} ;;
+  }
+}
 
 explore: county_28d_historical {}
 
