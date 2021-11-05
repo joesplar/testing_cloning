@@ -43,7 +43,7 @@ explore: county_14d{
 
 #explore: japan_prefecture_28d_historical {}
 
-#explore: japan_prefecture_28d {}
+explore: japan_prefecture_28d {}
 
 #explore: county_14d_historical_ {}
 
