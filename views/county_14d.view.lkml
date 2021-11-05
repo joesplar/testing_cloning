@@ -146,4 +146,10 @@ view: county_14d {
     type: count
     drill_fields: [county_name, state_name]
   }
+
+  measure: sum_comulative_death_14d {
+    type: sum
+    sql: ${cumulative_deaths} ;;
+  }
+
 }

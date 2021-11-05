@@ -194,4 +194,9 @@ view: county_28d {
     type: count
     drill_fields: [state_name, county_name]
   }
+
+  measure: sum_comulative_death_28d {
+    type: sum
+    sql: ${cumulative_deaths} ;;
+  }
 }
