@@ -4,6 +4,7 @@ view: county_14d {
 
   dimension: county_fips_code {
     type: string
+    primary_key: yes
     description: "5-digit unique identifer of the county."
     sql: ${TABLE}.county_fips_code ;;
   }
@@ -150,6 +151,11 @@ view: county_14d {
   measure: sum_comulative_death_14d {
     type: sum
     sql: ${cumulative_deaths} ;;
+  }
+
+  measure: total_population {
+    type: sum_distinct
+    sql: ${county_population} ;;
   }
 
 }
