@@ -22,11 +22,10 @@ explore: county_28d_historical_ {
 }
 
 explore: county_28d {
-  hidden: yes
   join: japan_prefecture_28d {
-    type: full_outer
-    relationship: many_to_many
-    sql_on: ${county_28d.forecast_date} = ${japan_prefecture_28d.forecast_date} ;;
+    type: cross
+    relationship: one_to_one
+    sql_on: 1 = 1;;
   }
 }
 
@@ -37,6 +36,7 @@ explore: county_14d{
     sql_on: ${county_14d.county_fips_code} = ${county_28d.county_fips_code};;
  }
 }
+
 #explore: county_28d_historical {}
 
 #explore: county_14d_historical {}
