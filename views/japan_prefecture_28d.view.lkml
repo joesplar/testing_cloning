@@ -146,6 +146,7 @@ view: japan_prefecture_28d {
 
   dimension: prefecture_code {
     type: string
+    primary_key: yes
     description: "Unique identifer of the prefecture."
     sql: ${TABLE}.prefecture_code ;;
   }

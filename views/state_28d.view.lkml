@@ -193,6 +193,7 @@ view: state_28d {
   dimension: state_fips_code {
     type: string
     description: "Unique identifier for the given state"
+    primary_key: yes
     sql: ${TABLE}.state_fips_code ;;
   }
 

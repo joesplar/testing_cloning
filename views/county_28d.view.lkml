@@ -4,6 +4,7 @@ view: county_28d {
 
   dimension: county_fips_code {
     type: string
+    primary_key: yes
     description: "5-digit unique identifer of the county."
     sql: ${TABLE}.county_fips_code ;;
   }
