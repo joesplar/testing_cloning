@@ -153,7 +153,9 @@ view: county_28d {
       week,
       month,
       quarter,
-      year
+      year,
+      month_name,
+      month_num
     ]
     convert_tz: no
     datatype: date
