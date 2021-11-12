@@ -202,4 +202,15 @@ view: county_28d {
     type: sum
     sql: ${cumulative_deaths} ;;
   }
+
+  measure: sum_new_confirmed_USA{
+    type: sum_distinct
+    sql:${new_confirmed} ;;
+  }
+
+  measure: sum_new_deaths_USA{
+    type: sum_distinct
+    sql:${new_deaths} ;;
+  }
+
 }

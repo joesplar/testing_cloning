@@ -197,4 +197,14 @@ view: japan_prefecture_28d {
     type: count
     drill_fields: [prefecture_name]
   }
+
+  measure: sum_new_confirmed_JAP{
+    type: sum_distinct
+    sql:${new_confirmed} ;;
+  }
+
+  measure: sum_new_deaths_JAP{
+    type: sum_distinct
+    sql:${new_deaths} ;;
+  }
 }
