@@ -125,6 +125,11 @@ view: county_14d {
     sql: ${TABLE}.prediction_date ;;
   }
 
+  dimension: test_raw_data {
+    type: date_raw
+    sql: ${TABLE}.prediction_date ;;
+  }
+
   dimension: recovered {
     type: number
     description: "Predicted number of people documented as recovered on the prediction_date. This is not cumulative over time"
