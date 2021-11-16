@@ -125,6 +125,13 @@ view: county_14d {
     sql: ${TABLE}.prediction_date ;;
   }
 
+  dimension_group: test_raw_group {
+    type: duration
+    intervals: [day, week, month, quarter, year]
+    sql_start:  ${test_raw_data} ;;
+    sql_end: ${prediction_raw} ;;
+  }
+
   dimension: test_raw_data {
     type: date_raw
     sql: DATE_SUB(${prediction_date} INTERVAL 1 DAY) ;;
