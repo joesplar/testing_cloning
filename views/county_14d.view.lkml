@@ -145,7 +145,7 @@ view: county_14d {
 
   measure: count {
     type: count
-    drill_fields: [county_name, state_name]
+    drill_fields: [county_details*]
   }
 
   measure: sum_comulative_death_14d {
@@ -156,6 +156,10 @@ view: county_14d {
   measure: total_population {
     type: sum_distinct
     sql: ${county_population} ;;
+  }
+
+  set: county_details {
+    fields: [county_name, state_name, county_population]
   }
 
 }
