@@ -128,7 +128,7 @@ view: county_14d {
   dimension_group: test_raw_group_intervals {
     type: duration
     intervals: [day, week, month, quarter, year]
-    sql_start:  ${prediction_raw} ;;
+    sql_start:  ${prediction_date} ;;
     sql_end: ${test_raw_data} ;;
   }
 
