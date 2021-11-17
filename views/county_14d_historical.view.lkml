@@ -158,4 +158,9 @@ view: county_14d_historical {
     type: count
     drill_fields: [county_name, state_name]
   }
+
+  measure: sum_distinct_cumulative_confirmed_ground_truth {
+    type:  sum_distinct
+    sql:  ${cumulative_confirmed_ground_truth} ;;
+  }
 }
