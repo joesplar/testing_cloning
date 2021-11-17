@@ -1,6 +1,17 @@
 view: japan_prefecture_28d {
-  sql_table_name: `bigquery-public-data.covid19_public_forecasts.japan_prefecture_28d`
-    ;;
+  #sql_table_name: `bigquery-public-data.covid19_public_forecasts.japan_prefecture_28d`;;
+  derived_table: {
+    sql:  SELECT
+          row_number() OVER(ORDER BY prefecture_code) AS prim_key,*
+          FROM `bigquery-public-data.covid19_public_forecasts.japan_prefecture_28d`
+          ;;
+  }
+
+  dimension: prim_key {
+    type: number
+    primary_key: yes
+    sql: ${TABLE}.prim_key ;;
+  }
 
   dimension: cumulative_confirmed {
     type: number
@@ -156,13 +167,6 @@ view: japan_prefecture_28d {
     sql: ${TABLE}.prefecture_name ;;
   }
 
-  dimension: primary_key {
-    primary_key: yes
-    hidden: yes
-    type:  string
-    sql: CONCAT(${TABLE}.prefecture_code, ' ', ${TABLE}.prefecture_name) ;;
-  }
-
   dimension: prefecture_name_kanji {
     type: string
     description: "Full text name of the prefecture in Kanji"
@@ -211,13 +215,11 @@ view: japan_prefecture_28d {
 
   measure: sum_new_confirmed_JAP{
     type: sum_distinct
-    sql_distinct_key: ${primary_key} ;;
     sql: ${new_confirmed} ;;
   }
 
   measure: sum_new_deaths_JAP{
     type: sum_distinct
-    sql_distinct_key: ${primary_key} ;;
     sql: ${new_deaths} ;;
   }
 }

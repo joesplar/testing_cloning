@@ -1,10 +1,19 @@
 view: county_28d {
-  sql_table_name: `bigquery-public-data.covid19_public_forecasts.county_28d`
-    ;;
+  derived_table: {
+    sql:  SELECT
+          row_number() OVER(ORDER BY county_fips_code) AS prim_key,*
+          FROM `bigquery-public-data.covid19_public_forecasts.county_28d`
+          ;;
+  }
+
+  dimension: prim_key {
+    type: number
+    primary_key: yes
+    sql: ${TABLE}.prim_key ;;
+  }
 
   dimension: county_fips_code {
     type: string
-    primary_key: yes
     description: "5-digit unique identifer of the county."
     sql: ${TABLE}.county_fips_code ;;
   }
