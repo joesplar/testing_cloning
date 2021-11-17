@@ -211,11 +211,13 @@ view: japan_prefecture_28d {
 
   measure: sum_new_confirmed_JAP{
     type: sum_distinct
+    sql_distinct_key: ${primary_key} ;;
     sql: ${new_confirmed} ;;
   }
 
   measure: sum_new_deaths_JAP{
     type: sum_distinct
+    sql_distinct_key: ${primary_key} ;;
     sql: ${new_deaths} ;;
   }
 }
