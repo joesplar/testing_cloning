@@ -1,6 +1,17 @@
 view: county_14d_historical {
-  sql_table_name: `bigquery-public-data.covid19_public_forecasts.county_14d_historical`
-    ;;
+
+  derived_table: {
+    sql:  SELECT
+          row_number() OVER(ORDER BY county_fips_code) AS prim_key,*
+          FROM `bigquery-public-data.covid19_public_forecasts.county_14d_historical`
+          ;;
+  }
+
+  dimension: prim_key {
+    type: number
+    primary_key: yes
+    sql: ${TABLE}.prim_key ;;
+  }
 
   dimension: county_fips_code {
     type: string
