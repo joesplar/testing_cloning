@@ -2,7 +2,7 @@ view: county_14d {
   derived_table: {
     sql:  SELECT
     row_number() OVER(ORDER BY county_fips_code) AS prim_key,*
-    FROM `bigquery-public-data.covid19_public_forecasts.county_28d`
+    FROM `bigquery-public-data.covid19_public_forecasts.county_14d`
     ;;
   }
 
@@ -11,7 +11,6 @@ view: county_14d {
     primary_key: yes
     sql: ${TABLE}.prim_key ;;
   }
-
 
   dimension: county_fips_code {
     type: string
