@@ -24,6 +24,7 @@ view: county_14d_historical {
     type: number
     description: "Predicted number of cumulative confirmed cases on the prediction_date. This is cumulative over time"
     sql: ${TABLE}.cumulative_confirmed ;;
+    value_format: "#,##0"
   }
 
   dimension: cumulative_confirmed_ground_truth {
