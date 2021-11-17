@@ -1,6 +1,5 @@
 view: county_28d {
-  sql_table_name: `bigquery-public-data.covid19_public_forecasts.county_28d`
-    ;;
+  sql_table_name: `bigquery-public-data.covid19_public_forecasts.county_28d`;;
 
   dimension: county_fips_code {
     type: string
