@@ -24,7 +24,7 @@ explore: county_28d_historical_ {
 explore: county_28d {
   join: japan_prefecture_28d {
     type: cross
-    relationship: one_to_one
+    relationship: one_to_many
     sql_on: 1 = 1;;
   }
 }

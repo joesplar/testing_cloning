@@ -146,7 +146,6 @@ view: japan_prefecture_28d {
 
   dimension: prefecture_code {
     type: string
-    primary_key: yes
     description: "Unique identifer of the prefecture."
     sql: ${TABLE}.prefecture_code ;;
   }
@@ -155,6 +154,13 @@ view: japan_prefecture_28d {
     type: string
     description: "Full text name of the prefecture"
     sql: ${TABLE}.prefecture_name ;;
+  }
+
+  dimension: primary_key {
+    primary_key: yes
+    hidden: yes
+    type:  string
+    sql: CONCAT(${TABLE}.prefecture_code, ' ', ${TABLE}.prefecture_name) ;;
   }
 
   dimension: prefecture_name_kanji {
@@ -205,11 +211,11 @@ view: japan_prefecture_28d {
 
   measure: sum_new_confirmed_JAP{
     type: sum_distinct
-    sql:${new_confirmed} ;;
+    sql: ${new_confirmed} ;;
   }
 
   measure: sum_new_deaths_JAP{
     type: sum_distinct
-    sql:${new_deaths} ;;
+    sql: ${new_deaths} ;;
   }
 }
