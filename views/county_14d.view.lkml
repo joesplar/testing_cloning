@@ -132,6 +132,12 @@ view: county_14d {
     sql_end: ${test_raw_data} ;;
   }
 
+  dimension: period_test_raw {
+    type: string
+    sql: ${county_name} ;;
+    order_by_field: test_raw_data
+  }
+
   dimension: test_raw_data {
     type: date_raw
     sql: DATE_SUB(${prediction_raw}, INTERVAL 0 DAY);;
