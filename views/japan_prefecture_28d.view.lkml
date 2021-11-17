@@ -198,6 +198,11 @@ view: japan_prefecture_28d {
     drill_fields: [prefecture_name]
   }
 
+  measure: sum_pouplation_prefecture {
+    type:  sum_distinct
+    sql: ${prefecture_population} ;;
+  }
+
   measure: sum_new_confirmed_JAP{
     type: sum_distinct
     sql:${new_confirmed} ;;
