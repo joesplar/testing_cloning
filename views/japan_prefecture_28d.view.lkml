@@ -203,6 +203,11 @@ view: japan_prefecture_28d {
     sql: ${TABLE}.recovered_q0975 ;;
   }
 
+  dimension: test_max_dimension {
+    type:  string
+    sql:  concat(MAX(${prediction_year},'Q', MAX(${prediction_quarter}))) ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [prefecture_name]
@@ -210,16 +215,19 @@ view: japan_prefecture_28d {
 
   measure: sum_pouplation_prefecture {
     type:  sum_distinct
+    value_format: "#,##0"
     sql: ${prefecture_population} ;;
   }
 
   measure: sum_new_confirmed_JAP{
     type: sum_distinct
+    value_format: "#,##0"
     sql: ${new_confirmed} ;;
   }
 
   measure: sum_new_deaths_JAP{
     type: sum_distinct
+    value_format: "#,##0"
     sql: ${new_deaths} ;;
   }
 }

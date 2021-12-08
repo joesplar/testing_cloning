@@ -18,6 +18,19 @@ view: county_28d {
     sql: ${TABLE}.county_fips_code ;;
   }
 
+
+  dimension: test_concat {
+    sql: CASE
+    WHEN ${TABLE}.county_fips_code LIKE '01%' THEN CONCAT(CAST(${prim_key} AS STRING), '123D')
+    ELSE ${county_fips_code}
+    END;;
+  }
+
+  measure: test_sum {
+    type:  sum_distinct
+    sql:  ${test_concat} ;;
+  }
+
   dimension: county_name {
     type: string
     description: "Full text name of the county"
@@ -28,6 +41,12 @@ view: county_28d {
     type: number
     description: "Total population of the county"
     sql: ${TABLE}.county_population ;;
+  }
+
+  dimension: test_null {
+    sql: case
+    when ${TABLE}.county_population > 0 then null
+    else "nothing"  end;;
   }
 
   dimension: cumulative_confirmed {
@@ -92,6 +111,12 @@ view: county_28d {
     convert_tz: no
     datatype: date
     sql: ${TABLE}.forecast_date ;;
+  }
+
+  parameter: cuenta_dias{
+    type: date
+    label: "Choose your date"
+
   }
 
   dimension: hospitalized_patients {
@@ -208,17 +233,20 @@ view: county_28d {
   }
 
   measure: sum_comulative_death_28d {
-    type: sum
+    type: sum_distinct
+    value_format: "#,##0"
     sql: ${cumulative_deaths} ;;
   }
 
   measure: sum_new_confirmed_USA{
     type: sum_distinct
+    value_format: "#,##0"
     sql:${new_confirmed} ;;
   }
 
   measure: sum_new_deaths_USA{
     type: sum_distinct
+    value_format: "#,##0"
     sql:${new_deaths} ;;
   }
 
