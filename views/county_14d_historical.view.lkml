@@ -1,6 +1,17 @@
 view: county_14d_historical {
-  sql_table_name: `bigquery-public-data.covid19_public_forecasts.county_14d_historical`
-    ;;
+
+  derived_table: {
+    sql:  SELECT
+          row_number() OVER(ORDER BY county_fips_code) AS prim_key,*
+          FROM `bigquery-public-data.covid19_public_forecasts.county_14d_historical`
+          ;;
+  }
+
+  dimension: prim_key {
+    type: number
+    primary_key: yes
+    sql: ${TABLE}.prim_key ;;
+  }
 
   dimension: county_fips_code {
     type: string
@@ -24,6 +35,7 @@ view: county_14d_historical {
     type: number
     description: "Predicted number of cumulative confirmed cases on the prediction_date. This is cumulative over time"
     sql: ${TABLE}.cumulative_confirmed ;;
+    value_format: "#,##0"
   }
 
   dimension: cumulative_confirmed_ground_truth {
@@ -145,5 +157,10 @@ view: county_14d_historical {
   measure: count {
     type: count
     drill_fields: [county_name, state_name]
+  }
+
+  measure: sum_distinct_cumulative_confirmed_ground_truth {
+    type:  sum_distinct
+    sql:  ${cumulative_confirmed_ground_truth} ;;
   }
 }
