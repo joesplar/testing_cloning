@@ -26,10 +26,6 @@ view: county_28d {
     END;;
   }
 
-  measure: test_sum {
-    type:  sum_distinct
-    sql:  ${test_concat} ;;
-  }
 
   dimension: county_name {
     type: string
@@ -225,6 +221,16 @@ view: county_28d {
     type: string
     description: "Full text name of the state in which a given county lies"
     sql: ${TABLE}.state_name ;;
+  }
+
+  filter: is_approved_test {
+    type: yesno
+     sql: {% condition is_approved_test %} ${is_aprroved_test_dimension} {% endcondition %} ;;
+  }
+
+  dimension: is_aprroved_test_dimension {
+    type: yesno
+    sql: ${state_name} = 'California' ;;
   }
 
   measure: count {
