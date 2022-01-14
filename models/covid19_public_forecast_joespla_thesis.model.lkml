@@ -36,7 +36,7 @@ persist_with: covid19_public_forecast_joespla_thesis_default_datagroup
 
 #explore: japan_prefecture_28d_historical {}
 
-#explore: japan_prefecture_28d {}
+explore: japan_prefecture_28d {}
 
 #explore: county_14d_historical_ {}
 
