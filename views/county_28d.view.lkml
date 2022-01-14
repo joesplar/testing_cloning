@@ -233,6 +233,53 @@ view: county_28d {
     sql: ${state_name} = 'California' ;;
   }
 
+  parameter: verison_test_parameter {
+    type: string
+    allowed_value: {value: "Uno"}
+    allowed_value: {value: "Dos"}
+    allowed_value: {value: "Tres"}
+    allowed_value: {value: "Cuatro"}
+  }
+
+  dimension: verison_test_dimension_one {
+    type: string
+    label_from_parameter: verison_test_parameter
+    sql:
+      CASE
+        WHEN {% parameter verison_test_parameter %} = 'Uno' THEN ${TABLE}.state_name
+        ELSE null
+      END;;
+  }
+
+  dimension: verison_test_dimension_two {
+    type: string
+    label_from_parameter: verison_test_parameter
+    sql:
+      CASE
+        WHEN {% parameter verison_test_parameter %} = 'Dos' THEN ${TABLE}.county_name
+        ELSE null
+      END;;
+  }
+
+  dimension: verison_test_dimension_three {
+    type: string
+    label_from_parameter: verison_test_parameter
+    sql:
+      CASE
+        WHEN {% parameter verison_test_parameter %} = 'Tres' THEN ${TABLE}.county_fips_code
+        ELSE null
+      END;;
+  }
+
+  measure: probando_none {
+    type: count_distinct
+    filters: {
+      field: state_name
+      value: "-None"
+    }
+    sql: ${county_fips_code} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [state_name, county_name]
