@@ -1,5 +1,6 @@
 connection: "bq-api"
 
+label: "Jorge probando modelos"
 # include all the views
 #include: "/views/**/*.view"
 
