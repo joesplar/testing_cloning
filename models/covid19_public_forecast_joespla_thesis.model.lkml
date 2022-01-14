@@ -2,7 +2,7 @@ connection: "bq-api"
 
 label: "Jorge probando modelos"
 # include all the views
-#include: "/views/**/*.view"
+include: "/views/**/*.view"
 
 datagroup: covid19_public_forecast_joespla_thesis_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
