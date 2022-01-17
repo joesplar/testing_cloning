@@ -1,4 +1,4 @@
-view: japan_prefecture_28d {
+view: japan_prefecture_28d_change {
   #sql_table_name: `bigquery-public-data.covid19_public_forecasts.japan_prefecture_28d`;;
   derived_table: {
     sql:  SELECT
