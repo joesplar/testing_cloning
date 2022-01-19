@@ -1,4 +1,4 @@
-view: state_14d {
+view: state_14d_change {
   sql_table_name: `bigquery-public-data.covid19_public_forecasts.state_14d`
     ;;
 
