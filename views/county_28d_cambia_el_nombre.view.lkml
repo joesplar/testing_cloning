@@ -109,6 +109,11 @@ view: county_28d {
     sql: ${TABLE}.forecast_date ;;
   }
 
+  dimension: testingyesnonull {
+    type: yesno
+    sql: ${forecast_date} is null ;;
+  }
+
   parameter: cuenta_dias{
     type: date
     label: "Choose your date"

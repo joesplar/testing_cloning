@@ -15,6 +15,7 @@ persist_with: covid19_public_forecast_joespla_thesis_default_datagroup
 
 
 explore: county_28d {
+  sql_always_where: ${county_28d.prediction_month_name} != 'December' AND ${county_28d.prediction_month_name} != 'February' ;;
   join: japan_prefecture_28d {
     type: cross
     relationship: one_to_one
