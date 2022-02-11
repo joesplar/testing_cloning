@@ -21,6 +21,7 @@ view: county_14d {
   dimension: county_name {
     type: string
     description: "Full text name of the county"
+    case_sensitive: no
     sql: ${TABLE}.county_name ;;
   }
 
