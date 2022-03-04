@@ -51,7 +51,7 @@ explore: japan_prefecture_28d {}
 #explore: state_14d_historical_ {}
 
 explore: state_14d_change {
-  extends: [state_28d]
+
 }
 
 #explore: state_28d_historical {}
