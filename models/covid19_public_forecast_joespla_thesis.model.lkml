@@ -52,6 +52,7 @@ explore: japan_prefecture_28d {}
 
 explore: state_14d_change {
   extends: [state_28d]
+  hidden: no
 }
 
 #explore: state_28d_historical {}
