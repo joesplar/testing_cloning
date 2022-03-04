@@ -25,6 +25,8 @@ explore: county_28d {
 }
 
 explore: county_14d{
+#sql_always_where: ${county_14d.county_population} is NOT null;;
+ view_name: county_14d
  join: county_28d{
     type:  left_outer
     relationship: one_to_one
@@ -48,10 +50,14 @@ explore: japan_prefecture_28d {}
 
 #explore: state_14d_historical_ {}
 
-explore: state_14d_change {}
+explore: state_14d_change {
+  extends: [state_28d]
+}
 
 #explore: state_28d_historical {}
 
 #explore: state_28d_historical_ {}
 
-explore: state_28d {}
+explore: state_28d {
+  hidden: yes
+}

@@ -28,7 +28,8 @@ view: county_14d {
   dimension: county_population {
     type: number
     description: "Total population of the county"
-    sql: ${TABLE}.county_population ;;
+    #sql:  COALESCE(${TABLE}.county_population,0) ;;
+    sql:  ${TABLE}.county_population ;;
   }
 
   dimension: cumulative_confirmed {
