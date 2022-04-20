@@ -44,6 +44,7 @@ explore: county_14d{
 explore: japan_prefecture_28d {
   query: test{
     label: "Esto es una prueba"
+    dimensions: [cumulative_confirmed]
   }
 }
 
