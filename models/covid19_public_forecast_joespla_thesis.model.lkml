@@ -31,6 +31,7 @@ explore: county_14d{
     type:  left_outer
     relationship: one_to_one
     sql_on: ${county_14d.county_fips_code} = ${county_28d.county_fips_code};;
+    sql_where: ${county_14d.state_name} = 'Los Angeles';;
  }
 }
 
@@ -40,7 +41,11 @@ explore: county_14d{
 
 #explore: japan_prefecture_28d_historical {}
 
-explore: japan_prefecture_28d {}
+explore: japan_prefecture_28d {
+  query: test{
+    label: "Esto es una prueba"
+  }
+}
 
 #explore: county_14d_historical_ {}
 

@@ -50,6 +50,13 @@
     stacking: ''
     legend_position: center
     series_types: {}
+    series_text_format:
+    view_name.field_name:
+        fg_color: '#eff4f6'
+        bg_color: '#1b2327'
+        bold: true | false
+        italic: true | false
+        align: left | center | right
     point_style: none
     show_value_labels: false
     label_density: 25
