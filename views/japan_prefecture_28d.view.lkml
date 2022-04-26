@@ -157,6 +157,7 @@ view: japan_prefecture_28d {
 
   dimension: prefecture_code {
     type: string
+    required_access_grants: [edgardo_y_su_kinder]
     description: "Unique identifer of the prefecture."
     sql: ${TABLE}.prefecture_code ;;
   }
