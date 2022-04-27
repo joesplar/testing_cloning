@@ -12,7 +12,7 @@ datagroup: covid19_public_forecast_joespla_thesis_default_datagroup {
 
 persist_with: covid19_public_forecast_joespla_thesis_default_datagroup
 
-access_grant: edgardo_y_su_kinder {
+access_grant: testing_regex_stuff {
   user_attribute: testing_regex
   allowed_values: ["otro"]
 }
