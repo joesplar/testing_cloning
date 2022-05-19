@@ -1,4 +1,4 @@
-connection: "bq-api"
+connection: "looker-you-beautiful"
 
 label: "Jorge probando modelos"
 # include all the views
@@ -12,10 +12,10 @@ datagroup: covid19_public_forecast_joespla_thesis_default_datagroup {
 
 persist_with: covid19_public_forecast_joespla_thesis_default_datagroup
 
-access_grant: testing_regex_stuff {
-  user_attribute: testing_regex
-  allowed_values: ["otro"]
-}
+#access_grant: testing_regex_stuff {
+#  user_attribute: testing_regex
+#  allowed_values: ["otro"]
+#}
 
 #explore: county_14d {}
 
