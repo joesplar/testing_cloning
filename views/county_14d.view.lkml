@@ -6,6 +6,8 @@ view: county_14d {
     ;;
   }
 
+  required_access_grants: [can_view_test]
+
   dimension: prim_key {
     type: number
     primary_key: yes

@@ -17,6 +17,11 @@ persist_with: covid19_public_forecast_joespla_thesis_default_datagroup
 #  allowed_values: ["otro"]
 #}
 
+access_grant: can_view_test{
+  user_attribute: view_this
+  allowed_values: ["yes"]
+}
+
 #explore: county_14d {}
 
 
