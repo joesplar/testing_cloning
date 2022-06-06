@@ -15,10 +15,6 @@ view: gamelog {
     timeframes: [
       raw,
       date,
-      week,
-      month,
-      quarter,
-      year
     ]
     convert_tz: no
     datatype: date
