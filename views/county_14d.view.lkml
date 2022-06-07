@@ -6,6 +6,8 @@ view: county_14d {
     ;;
   }
 
+  required_access_grants: [can_view_test]
+
   dimension: prim_key {
     type: number
     primary_key: yes
@@ -21,13 +23,21 @@ view: county_14d {
   dimension: county_name {
     type: string
     description: "Full text name of the county"
+    case_sensitive: no
     sql: ${TABLE}.county_name ;;
+    link: {
+      label: "Explore County 28 days"
+      #url: "google.com"
+      #url: "/explore/covid19_public_forecast_joespla_thesis/county_28d?fields=county_28d.county_name,county_28d.new_confirmed&f[county_28d.county_name]={{value}}&f[county_28d.new_confirmed]=NOT+NULL&sorts=county_28d.county_name&limit=500"
+      url: "https://gcpl226.cloud.looker.com/explore/covid19_public_forecast_joespla_thesis/county_28d?fields=county_28d.county_name,county_28d.new_confirmed&f[county_28d.county_name]={{value}}&f[county_28d.new_confirmed]=NOT+NULL&sorts=county_28d.county_name&limit=500"
+    }
   }
 
   dimension: county_population {
     type: number
     description: "Total population of the county"
-    sql: ${TABLE}.county_population ;;
+    #sql:  COALESCE(${TABLE}.county_population,0) ;;
+    sql:  ${TABLE}.county_population ;;
   }
 
   dimension: cumulative_confirmed {

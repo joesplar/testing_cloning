@@ -1,7 +1,9 @@
-connection: "bq-api"
+connection: "looker-you-beautiful"
 
+label: "Jorge probando modelos"
 # include all the views
 include: "/views/**/*.view"
+include: "/*.dashboard"
 
 datagroup: covid19_public_forecast_joespla_thesis_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
@@ -10,18 +12,21 @@ datagroup: covid19_public_forecast_joespla_thesis_default_datagroup {
 
 persist_with: covid19_public_forecast_joespla_thesis_default_datagroup
 
-#explore: county_14d {}
+#access_grant: testing_regex_stuff {
+#  user_attribute: testing_regex
+#  allowed_values: ["otro"]
+#}
 
-explore: county_28d_historical_ {
-  hidden: yes
-  join: japan_prefecture_28d_historical_ {
-    type: full_outer
-    relationship: many_to_many
-    sql_on:  ${county_28d_historical_.forecast_date} =  ${japan_prefecture_28d_historical_.forecast_date};;
-  }
+access_grant: can_view_test{
+  user_attribute: view_this
+  allowed_values: ["yes"]
 }
 
+#explore: county_14d {}
+
+
 explore: county_28d {
+  sql_always_where: ${county_28d.prediction_month_name} != 'December' AND ${county_28d.prediction_month_name} != 'February' ;;
   join: japan_prefecture_28d {
     type: cross
     relationship: one_to_one
@@ -30,20 +35,28 @@ explore: county_28d {
 }
 
 explore: county_14d{
+#sql_always_where: ${county_14d.county_population} is NOT null;;
+ view_name: county_14d
  join: county_28d{
     type:  left_outer
     relationship: one_to_one
     sql_on: ${county_14d.county_fips_code} = ${county_28d.county_fips_code};;
+    sql_where: ${county_14d.state_name} = 'Los Angeles';;
  }
 }
 
 #explore: county_28d_historical {}
 
-explore: county_14d_historical {}
+#explore: county_14d_historical {}
 
 #explore: japan_prefecture_28d_historical {}
 
-explore: japan_prefecture_28d {}
+explore: japan_prefecture_28d {
+  query: test{
+    label: "Esto es una prueba"
+    dimensions: [cumulative_confirmed]
+  }
+}
 
 #explore: county_14d_historical_ {}
 
@@ -53,10 +66,15 @@ explore: japan_prefecture_28d {}
 
 #explore: state_14d_historical_ {}
 
-#explore: state_14d {}
+explore: state_14d_change {
+  extends: [state_28d]
+  hidden: no
+}
 
 #explore: state_28d_historical {}
 
 #explore: state_28d_historical_ {}
 
-#explore: state_28d {}
+explore: state_28d {
+  hidden: yes
+}

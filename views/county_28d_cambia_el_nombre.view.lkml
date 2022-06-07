@@ -18,6 +18,15 @@ view: county_28d {
     sql: ${TABLE}.county_fips_code ;;
   }
 
+
+  dimension: test_concat {
+    sql: CASE
+    WHEN ${TABLE}.county_fips_code LIKE '01%' THEN CONCAT(CAST(${prim_key} AS STRING), '123D')
+    ELSE ${county_fips_code}
+    END;;
+  }
+
+
   dimension: county_name {
     type: string
     description: "Full text name of the county"
@@ -28,6 +37,12 @@ view: county_28d {
     type: number
     description: "Total population of the county"
     sql: ${TABLE}.county_population ;;
+  }
+
+  dimension: test_null {
+    sql: case
+    when ${TABLE}.county_population > 0 then null
+    else "nothing"  end;;
   }
 
   dimension: cumulative_confirmed {
@@ -92,6 +107,17 @@ view: county_28d {
     convert_tz: no
     datatype: date
     sql: ${TABLE}.forecast_date ;;
+  }
+
+  dimension: testingyesnonull {
+    type: yesno
+    sql: ${forecast_date} is null ;;
+  }
+
+  parameter: cuenta_dias{
+    type: date
+    label: "Choose your date"
+
   }
 
   dimension: hospitalized_patients {
@@ -202,23 +228,83 @@ view: county_28d {
     sql: ${TABLE}.state_name ;;
   }
 
+  filter: is_approved_test {
+    type: yesno
+     sql: {% condition is_approved_test %} ${is_aprroved_test_dimension} {% endcondition %} ;;
+  }
+
+  dimension: is_aprroved_test_dimension {
+    type: yesno
+    sql: ${state_name} = 'California' ;;
+  }
+
+  parameter: verison_test_parameter {
+    type: string
+    allowed_value: {value: "Uno"}
+    allowed_value: {value: "Dos"}
+    allowed_value: {value: "Tres"}
+    allowed_value: {value: "Cuatro"}
+  }
+
+  dimension: verison_test_dimension_one {
+    type: string
+    label_from_parameter: verison_test_parameter
+    sql:
+      CASE
+        WHEN {% parameter verison_test_parameter %} = 'Uno' THEN ${TABLE}.state_name
+        ELSE null
+      END;;
+  }
+
+  dimension: verison_test_dimension_two {
+    type: string
+    label_from_parameter: verison_test_parameter
+    sql:
+      CASE
+        WHEN {% parameter verison_test_parameter %} = 'Dos' THEN ${TABLE}.county_name
+        ELSE null
+      END;;
+  }
+
+  dimension: verison_test_dimension_three {
+    type: string
+    label_from_parameter: verison_test_parameter
+    sql:
+      CASE
+        WHEN {% parameter verison_test_parameter %} = 'Tres' THEN ${TABLE}.county_fips_code
+        ELSE null
+      END;;
+  }
+
+  measure: probando_none {
+    type: count_distinct
+    filters: {
+      field: state_name
+      value: "-None"
+    }
+    sql: ${county_fips_code} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [state_name, county_name]
   }
 
   measure: sum_comulative_death_28d {
-    type: sum
+    type: sum_distinct
+    value_format: "#,##0"
     sql: ${cumulative_deaths} ;;
   }
 
   measure: sum_new_confirmed_USA{
     type: sum_distinct
+    value_format: "#,##0"
     sql:${new_confirmed} ;;
   }
 
   measure: sum_new_deaths_USA{
     type: sum_distinct
+    value_format: "#,##0"
     sql:${new_deaths} ;;
   }
 
